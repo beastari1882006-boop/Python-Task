@@ -1,0 +1,229 @@
+Python Task Day-3
+
+
+Q1. E1 — Type Casting & Numeric Operations
+
+Problem: Read numeric values as strings, safely convert them, demonstrate round(), and display division, floor division, modulus and exponentiation.
+
+try:
+    a = int(input("Integer: "))
+    b = float(input("Decimal: "))
+    print("Integer Value :", a)
+    print("Integer Type  :", type(a).__name__)
+    print("Float Value   :", b)
+    print("Float Type    :", type(b).__name__)
+    print("Rounded Value :", round(b))
+    x = int(b)
+    print(f"{a} / {x} =", round(a / x, 4))
+    print(f"{a} // {x} =", a // x)
+    print(f"{a} % {x} =", a % x)
+    print(f"{a} ** 2 =", a ** 2)
+except (ValueError, ZeroDivisionError):
+    print("Invalid numeric input")
+
+
+Q2. E2 — Caesar Cipher
+
+
+msg = input("Message: ")
+shift = int(input("Shift: "))
+encrypted = ""
+for ch in msg:
+    if ch.isupper():
+        encrypted += chr((ord(ch) - 65 + shift) % 26 + 65)
+    elif ch.islower():
+        encrypted += chr((ord(ch) - 97 + shift) % 26 + 97)
+    else:
+        encrypted += ch
+decrypted = ""
+for ch in encrypted:
+    if ch.isupper():
+        decrypted += chr((ord(ch) - 65 - shift) % 26 + 65)
+    elif ch.islower():
+        decrypted += chr((ord(ch) - 97 - shift) % 26 + 97)
+    else:
+        decrypted += ch
+print("Encrypted:", encrypted)
+print("Decrypted:", decrypted)
+
+
+Q3. Number Analyzer
+
+
+start = int(input("Start: "))
+end = int(input("End: "))
+print("Number Prime Perfect Armstrong Palindrome DigitSum Digits Binary")
+for n in range(start, end + 1):
+    prime = n > 1
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            prime = False
+            break
+    s = str(n)
+    digit_sum = sum(int(d) for d in s)
+    digits = len(s)
+    palindrome = s == s[::-1]
+    armstrong = sum(int(d) ** digits for d in s) == n
+    total = 0
+    for i in range(1, n):
+        if n % i == 0:
+            total += i
+    perfect = total == n
+    print(n, "Yes" if prime else "No",
+          "Yes" if perfect else "No",
+          "Yes" if armstrong else "No",
+          "Yes" if palindrome else "No",
+          digit_sum, digits, bin(n)[2:])
+
+
+Q4. E3 — Number System Converter + GCD/LCM
+
+
+a = int(input("Number 1: "))
+b = int(input("Number 2: "))
+def convert(n, base):
+    digits = "0123456789ABCDEF"
+    result = ""
+    while n > 0:
+        result = digits[n % base] + result
+        n //= base
+    return result or "0"
+x, y = a, b
+while y:
+    x, y = y, x % y
+gcd = x
+lcm = (a * b) // gcd
+print("Binary      :", convert(a, 2))
+print("Octal       :", convert(a, 8))
+print("Hexadecimal :", convert(a, 16))
+print("GCD         :", gcd)
+print("LCM         :", lcm)
+
+
+Q5. Two-Divisor FizzBuzz
+
+
+n = int(input("N: "))
+d1 = int(input("Divisor 1: "))
+w1 = input("Word 1: ")
+d2 = int(input("Divisor 2: "))
+w2 = input("Word 2: ")
+for i in range(1, n + 1):
+    if i % d1 == 0 and i % d2 == 0:
+        print(w1 + w2)
+    elif i % d1 == 0:
+        print(w1)
+    elif i % d2 == 0:
+        print(w2)
+    else:
+        print(i)
+
+
+Q6. Student Mark Conversion & Result Analyzer
+
+
+n = int(input("Students: "))
+print("Student  Total  Average  Grade")
+for i in range(n):
+    name, marks = input().split(":", 1)
+    try:
+        m = [float(x) for x in marks.split()]
+        if len(m) != 3 or any(x < 0 or x > 100 for x in m):
+            print(name, "Invalid marks")
+            continue
+        total = sum(m)
+        avg = total / 3
+        if avg >= 90:
+            grade = "A+"
+        elif avg >= 75:
+            grade = "A"
+        elif avg >= 50:
+            grade = "B"
+        else:
+            grade = "Fail"
+        print(f"{name:<8} {total:6.0f} {avg:8.2f} {grade}")
+    except ValueError:
+        print(name, "Invalid marks")
+
+
+Q7. Digital Payment Transaction Analyzer
+
+
+n = int(input("Transactions: "))
+values = []
+rejected = 0
+for i in range(n):
+    try:
+        x = float(input())
+        if x < 0:
+            rejected += 1
+        else:
+            values.append(x)
+    except ValueError:
+        rejected += 1
+print("Successful Transactions :", len(values))
+if values:
+    print(f"Total Amount            : ₹{sum(values):.2f}")
+    print(f"Highest Transaction     : ₹{max(values):.2f}")
+    print(f"Lowest Transaction      : ₹{min(values):.2f}")
+    print(f"Average Transaction     : ₹{sum(values)/len(values):.2f}")
+else:
+    print("No successful transactions")
+print("Rejected Transactions   :", rejected)
+
+
+Q8. LeetCode #8 — String to Integer (atoi)
+
+
+s = input()
+i = 0
+while i < len(s) and s[i] == " ":
+    i += 1
+sign = 1
+if i < len(s) and s[i] in "+-":
+    if s[i] == "-":
+        sign = -1
+    i += 1
+num = 0
+while i < len(s) and s[i].isdigit():
+    num = num * 10 + (ord(s[i]) - ord('0'))
+    i += 1
+print(sign * num)
+
+
+Q9. LeetCode #67 — Add Binary
+
+
+a = input("a = ")
+b = input("b = ")
+i = len(a) - 1
+j = len(b) - 1
+carry = 0
+result = ""
+while i >= 0 or j >= 0 or carry:
+    total = carry
+    if i >= 0:
+        total += int(a[i])
+        i -= 1
+    if j >= 0:
+        total += int(b[j])
+        j -= 1
+    result = str(total % 2) + result
+    carry = total // 2
+print(result)
+
+
+Q10. LeetCode #202 — Happy Number
+
+
+n = int(input())
+seen = set()
+while n != 1 and n not in seen:
+    seen.add(n)
+    total = 0
+    while n > 0:
+        digit = n % 10
+        total += digit ** 2
+        n //= 10
+    n = total
+print(n == 1)
