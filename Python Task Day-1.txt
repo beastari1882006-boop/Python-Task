@@ -1,0 +1,148 @@
+PYTHON TASK DAY-1
+
+Q1. Temperature Conversion & Formatted Output
+
+c = float(input("Enter Celsius: "))
+f = (c * 9/5) + 32
+k = c + 273.15
+print(f"Celsius: {c:.2f}°C")
+print(f"Fahrenheit: {f:.2f}°F")
+print(f"Kelvin: {k:.2f} K")
+print("\nConversion Table")
+print("Celsius  Fahrenheit  Kelvin")
+for c in range(-40, 101, 10):
+    f = (c * 9/5) + 32
+    k = c + 273.15
+    print(f"{c:7.2f} {f:11.2f} {k:8.2f}")
+
+Q2. Three-Number Analyzer
+
+a, b, c = map(float, input("Enter 3 numbers: ").split())
+print("Largest:", max(a, b, c))
+print("Smallest:", min(a, b, c))
+print("Average:", f"{(a+b+c)/3:.2f}")
+n = int(input("Enter a number: "))
+if n > 0:
+    if n % 2 == 0:
+        print("Classification: Positive and Even")
+    else:
+        print("Classification: Positive and Odd")
+elif n < 0:
+    if n % 2 == 0:
+        print("Classification: Negative and Even")
+    else:
+        print("Classification: Negative and Odd")
+else:
+    print("Classification: Zero")
+
+Q3. Leap Year + Grade Calculator
+
+year = int(input("Year: "))
+marks = int(input("Marks: "))
+if year % 400 == 0 or (year % 4 == 0 and year % 100 != 0):
+    print(year, "is a Leap Year")
+else:
+    print(year, "is not a Leap Year")
+if marks < 0 or marks > 100:
+    print("Invalid marks. Enter a value between 0 and 100.")
+elif marks >= 90:
+    print("Grade: A+")
+elif marks >= 75:
+    print("Grade: A")
+elif marks >= 50:
+    print("Grade: B")
+else:
+    print("Grade: Fail")
+
+Q4. Placement Bill Calculator
+
+items = []
+total = 0
+while True:
+    x = input("Enter price or done: ")
+    if x.lower() == "done":
+        break
+    price = float(x)
+    items.append(price)
+    total += price
+if total >= 500:
+    discount = total * 0.10
+else:
+    discount = total * 0.05
+after_discount = total - discount
+tax = after_discount * 0.05
+final = after_discount + tax
+print("\nItem        Price")
+print("------------------")
+for i, price in enumerate(items, 1):
+    print(f"Item {i:<5} {price:.2f}")
+print("------------------")
+print(f"Subtotal     {total:.2f}")
+print(f"Discount     {discount:.2f}")
+print(f"Tax          {tax:.2f}")
+print(f"Final        {final:.2f}")
+
+Q5. Swap Without Temporary Variable
+
+a = int(input("a = "))
+b = int(input("b = "))
+print(f"Before Swap: a = {a}, b = {b}")
+a, b = b, a
+print(f"After Swap: a = {a}, b = {b}")
+
+Q6. Simple Interest Report
+
+p = float(input("Principal: "))
+r = float(input("Rate: "))
+t = float(input("Time: "))
+if p < 0 or t < 0:
+    print("Invalid principal or time")
+else:
+    si = (p * r * t) / 100
+    total = p + si
+    print(f"Principal : {p:.2f}")
+    print(f"Rate      : {r:.2f}%")
+    print(f"Time      : {t:.2f} years")
+    print(f"Simple Interest: {si:.2f}")
+    print(f"Total Amount : {total:.2f}")
+
+Q7. Type Inspector
+
+value = input("Enter value: ")
+print("Original value type :", type(value).__name__)
+try:
+    x = int(value)
+    print("Integer value :", x)
+    print("Integer type :", type(x).__name__)
+except ValueError:
+    print("Invalid integer conversion")
+try:
+    y = float(value)
+    print("Float value :", y)
+    print("Float type :", type(y).__name__)
+except ValueError:
+    print("Invalid float conversion")
+
+Q8. Fix the Bug: Input Types
+
+a = float(input("Enter first value: "))
+b = float(input("Enter second value: "))
+print("Sum:", a + b)
+
+Q9. Multiple Assignment Analyzer
+
+values = 10, 3.14, "Python", True, None
+for value in values:
+    print("Value:", value, "Type:", type(value).__name__)
+
+Q10. Expression Evaluator
+
+a = 19
+b = 4
+print("a / b =", a / b)
+print("a // b =", a // b)
+print("a % b =", a % b)
+print("a ** b =", a ** b)
+print("Negative floor division example")
+print("-19 // 4 =", -19 // 4)
+
