@@ -1,0 +1,337 @@
+PYTHON TASK DAY-4
+
+
+Q1. Number Classification Report
+
+n = int(input())
+numbers = list(map(int, input().split()))
+positive = negative = zero = even = odd = 0
+both = only3 = only5 = neither = 0
+for num in numbers[:n]:
+    if num > 0:
+        positive += 1
+    elif num < 0:
+        negative += 1
+    else:
+        zero += 1
+    if num != 0:
+        if num % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    if num % 3 == 0 and num % 5 == 0:
+        both += 1
+    elif num % 3 == 0:
+        only3 += 1
+    elif num % 5 == 0:
+        only5 += 1
+    else:
+        neither += 1
+print("Positive:", positive)
+print("Negative:", negative)
+print("Zero:", zero)
+print("Even:", even)
+print("Odd:", odd)
+print("Divisible by both 3 and 5:", both)
+print("Divisible only by 3:", only3)
+print("Divisible only by 5:", only5)
+print("Divisible by neither:", neither)
+
+Sample Input:
+6
+15 10 0 -7 30 11
+
+Sample Output:
+Positive: 4
+Negative: 1
+Zero: 1
+Even: 2
+Odd: 3
+Divisible by both 3 and 5: 3
+Divisible only by 3: 0
+Divisible only by 5: 1
+Divisible by neither: 2
+
+
+Q2. Valid Input Until Accepted
+
+invalid = 0
+while True:
+    value = int(input())
+    if value < 1 or value > 100:
+        print("Invalid input")
+        invalid += 1
+        continue
+    break
+print("Accepted value:", value)
+print("Invalid attempts:", invalid)
+
+Sample Input:
+150
+-4
+0
+75
+
+Sample Output:
+Invalid input
+Invalid input
+Invalid input
+Accepted value: 75
+Invalid attempts: 3
+
+
+Q3. Menu-Driven Unit Converter
+
+while True:
+    print("1. Celsius to Fahrenheit")
+    print("2. Kilometres to Miles")
+    print("3. Kilograms to Pounds")
+    print("4. Exit")
+    choice = int(input())
+    if choice == 1:
+        c = float(input("Enter Celsius: "))
+        print("Celsius to Fahrenheit:", round(c * 9 / 5 + 32, 2))
+    elif choice == 2:
+        km = float(input("Enter kilometres: "))
+        print("Kilometres to Miles:", round(km * 0.621371, 2))
+    elif choice == 3:
+        kg = float(input("Enter kilograms: "))
+        print("Kilograms to Pounds:", round(kg * 2.20462, 2))
+    elif choice == 4:
+        print("Exit")
+        break
+    else:
+        print("Invalid choice")
+        continue
+
+Sample Input :
+5
+100
+2
+100
+4
+
+Sample Output:
+Invalid choice
+Kilometres to Miles: 62.14
+
+
+Q4. Multiplication Table with Selective Skipping
+
+n = int(input())
+skipped = 0
+for i in range(1, 21):
+    result = n * i
+    if result > 100:
+        break
+    if result % 3 == 0:
+        skipped += 1
+        continue
+    print(n, "x", i, "=", result)
+print("Skipped results:", skipped)
+
+Sample Input:
+7
+
+Sample Output:
+7 x 1 = 7
+7 x 2 = 14
+7 x 4 = 28
+7 x 5 = 35
+7 x 7 = 49
+7 x 8 = 56
+7 x 10 = 70
+7 x 11 = 77
+7 x 13 = 91
+7 x 14 = 98
+Skipped results: 4
+
+
+Q5. Password Validation System
+
+password = input()
+upper = lower = digit = special = False
+for ch in password:
+    if ch.isupper():
+        upper = True
+    elif ch.islower():
+        lower = True
+    elif ch.isdigit():
+        digit = True
+    else:
+        special = True
+length_ok = len(password) >= 8
+if upper and lower and digit and special and length_ok:
+    print("Valid password")
+else:
+    print("Invalid password")
+print("Uppercase:", "Present" if upper else "Missing")
+print("Lowercase:", "Present" if lower else "Missing")
+print("Digit:", "Present" if digit else "Missing")
+print("Special character:", "Present" if special else "Missing")
+print("Minimum length:", "Satisfied" if length_ok else "Not satisfied")
+
+Sample Input:
+Hello@123
+
+Sample Output:
+Valid password
+Uppercase: Present
+Lowercase: Present
+Digit: Present
+Special character: Present
+Minimum length: Satisfied
+
+
+Q6. Hollow Square Pattern
+
+n = int(input())
+for i in range(n):
+    for j in range(n):
+        if i == 0 or i == n - 1 or j == 0 or j == n - 1:
+            print("*", end=" ")
+        else:
+            print(" ", end=" ")
+    print()
+
+Sample Input:
+5
+
+Sample Output:
+* * * * *
+*       *
+*       *
+*       *
+* * * * *
+
+
+Q7. First Perfect Square in a Range
+
+L, R = map(int, input().split())
+found = False
+for number in range(max(0, L), R + 1):
+    candidate = 0
+    while candidate * candidate < number:
+        candidate += 1
+    if candidate * candidate == number:
+        print("First perfect square:", number)
+        found = True
+        break
+if not found:
+    print("No perfect square found")
+
+Sample Input:
+14 30
+
+Sample Output:
+First perfect square: 16
+
+
+Q8. Number Guessing Game with Limited Attempts
+
+secret = 8
+attempts = 0
+while attempts < 5:
+    guess = int(input())
+    attempts += 1
+    if guess < secret:
+        print("Too Low")
+    elif guess > secret:
+        print("Too High")
+    else:
+        print("Correct")
+        break
+if attempts == 5 and guess != secret:
+    print("Game Over")
+
+Sample Input:
+1
+5
+7
+9
+10
+
+Sample Output:
+Too Low
+Too Low
+Too Low
+Too High
+Too High
+Game Over
+
+
+Q9. Longest Consecutive Equal Values
+
+n = int(input())
+numbers = list(map(int, input().split()))
+if n > 0:
+    current_value = numbers[0]
+    current_length = 1
+    best_value = numbers[0]
+    best_length = 1
+    for i in range(1, min(n, len(numbers))):
+        if numbers[i] == current_value:
+            current_length += 1
+        else:
+            current_value = numbers[i]
+            current_length = 1
+        if current_length > best_length:
+            best_length = current_length
+            best_value = current_value
+    print("Value =", best_value)
+    print("Length =", best_length)
+else:
+    print("Sequence is empty")
+
+Sample Input:
+10
+1 1 2 2 2 3 3 3 3 1
+
+Sample Output:
+Value = 3
+Length = 4
+
+
+Q10. Transaction Validation & Summary
+
+normal = large = suspicious = 0
+total = 0
+while True:
+    amount = int(input())
+    if amount == -1:
+        break
+    elif amount == 0:
+        pass
+    elif amount < 0:
+        continue
+    elif amount <= 1000:
+        normal += 1
+        total += amount
+    elif amount <= 5000:
+        large += 1
+        total += amount
+    else:
+        suspicious += 1
+        total += amount
+        if suspicious == 3:
+            break
+print("Normal transactions:", normal)
+print("Large transactions:", large)
+print("Suspicious transactions:", suspicious)
+print("Total valid amount:", total)
+
+Sample Input:
+500
+0
+-25
+1500
+7000
+6000
+800
+-1
+
+Sample Output:
+Normal transactions: 2
+Large transactions: 1
+Suspicious transactions: 2
+Total valid amount: 10000
